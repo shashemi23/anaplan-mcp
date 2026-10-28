@@ -165,7 +165,40 @@ Quit Claude Desktop completely (right-click the system tray icon and quit - don'
 - **OAuth refresh failed / reauthorization required** - The MCP server is up and reached Anaplan, but the saved OAuth session is no longer valid. Re-authorize in your MCP client, then retry the tool.
 - **Model opens in the browser but is missing from discovery / returns metadata 404** - Discovery can omit accessible models, including models in another customer/tenant. Extract the IDs after `/workspaces/` and `/models/` in the browser URL and pass them directly to `show_modules` or `show_imports`. `show_modeldetails` now checks these read-only endpoints if global model metadata returns 404 and reports verified access separately from unavailable metadata. Names require discovery, so use explicit IDs for omitted models. This does not grant additional permissions or prove that writes/actions are allowed; no customer prefix or header is added to the Integration API.
 
-### Connect to Claude Code
+### Install as a Claude Code plugin
+
+The repo is also a Claude Code plugin and marketplace. The plugin bundles the MCP server (it installs dependencies and builds itself on first launch, so no clone or build step), an `anaplan` skill with workflow guidance, slash commands, and a hook that always asks before destructive actions.
+
+Set one auth method in the shell that launches Claude Code (see [Environment variables](#environment-variables)), for example:
+
+```bash
+export ANAPLAN_CLIENT_ID=your-client-id
+```
+
+Then, inside Claude Code:
+
+```
+/plugin marketplace add shashemi23/anaplan-mcp
+/plugin install anaplan@anaplan-mcp
+```
+
+On Claude Code 2.1.275 or later this is one step:
+
+```
+/plugin install anaplan --marketplace shashemi23/anaplan-mcp
+```
+
+| Command | What it does |
+|---------|--------------|
+| `/anaplan:setup` | Check Node and credentials, sign in, and explain auth options |
+| `/anaplan:explore [workspace] [model]` | Map a model's modules, lists, time/version setup, and actions |
+| `/anaplan:read <model> <module> [view]` | Read module data efficiently with page filters |
+| `/anaplan:run-import <model> <import> [csv]` | Validate a CSV against an import, confirm, run, and explain failures |
+| `/anaplan:debug <model> <action>` | Diagnose a failed import, export, or process from its dump files |
+
+`run_delete`, `delete_list_items`, `delete_file`, `bulk_delete_models`, `close_model`, `set_currentperiod`, `set_fiscalyear`, `set_versionswitchover`, and `reset_list_index` always prompt for approval, even in auto-accept modes.
+
+### Connect to Claude Code (manual)
 
 Copy `.mcp.json.example` to `.mcp.json` and fill in your credentials. The file is gitignored by default - never commit credentials to version control.
 
