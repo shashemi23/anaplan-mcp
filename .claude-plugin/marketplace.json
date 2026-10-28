@@ -1,0 +1,17 @@
+{
+  "name": "anaplan-mcp",
+  "owner": {
+    "name": "Lara Srinath"
+  },
+  "metadata": {
+    "description": "Unofficial Anaplan plugin for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "anaplan",
+      "source": "./",
+      "description": "Anaplan Integration API v2 tools, workflow skills, and slash commands for Claude Code.",
+      "category": "productivity"
+    }
+  ]
+}

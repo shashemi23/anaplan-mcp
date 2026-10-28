@@ -37,3 +37,4 @@ examples/local/
 skills/*
 !skills/example.md
 !skills/*.pdf
+!skills/anaplan/

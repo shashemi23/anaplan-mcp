@@ -1,0 +1,27 @@
+{
+  "name": "anaplan",
+  "version": "1.2.0",
+  "description": "Anaplan Integration API v2 for Claude Code: 70 MCP tools to browse workspaces and models, read and write data, run imports/exports/processes, and administer models, plus workflow skills, slash commands, and a confirmation guard on destructive actions.",
+  "author": {
+    "name": "Lara Srinath"
+  },
+  "homepage": "https://github.com/larasrinath/anaplan-mcp",
+  "repository": "https://github.com/larasrinath/anaplan-mcp",
+  "license": "MIT",
+  "keywords": ["anaplan", "mcp", "planning", "fp&a", "integration-api"],
+  "mcpServers": {
+    "anaplan": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/launch.mjs"],
+      "env": {
+        "ANAPLAN_CLIENT_ID": "${ANAPLAN_CLIENT_ID:-}",
+        "ANAPLAN_REFRESH_TOKEN": "${ANAPLAN_REFRESH_TOKEN:-}",
+        "ANAPLAN_CERTIFICATE_PATH": "${ANAPLAN_CERTIFICATE_PATH:-}",
+        "ANAPLAN_PRIVATE_KEY_PATH": "${ANAPLAN_PRIVATE_KEY_PATH:-}",
+        "ANAPLAN_CERTIFICATE_ENCODED_DATA_FORMAT": "${ANAPLAN_CERTIFICATE_ENCODED_DATA_FORMAT:-v2}",
+        "ANAPLAN_USERNAME": "${ANAPLAN_USERNAME:-}",
+        "ANAPLAN_PASSWORD": "${ANAPLAN_PASSWORD:-}"
+      }
+    }
+  }
+}

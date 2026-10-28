@@ -1,0 +1,16 @@
+{
+  "description": "Ask before running irreversible or calendar-changing Anaplan actions",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*anaplan.*__(run_delete|delete_list_items|delete_file|bulk_delete_models|close_model|set_currentperiod|set_fiscalyear|set_versionswitchover|reset_list_index)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/confirm-destructive.mjs\""
+          }
+        ]
+      }
+    ]
+  }
+}
