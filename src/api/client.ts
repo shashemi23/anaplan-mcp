@@ -1,7 +1,7 @@
 import { gzipSync } from "node:zlib";
 import type { AuthManager } from "../auth/manager.js";
 
-const BASE_URL = "https://api.anaplan.com/2/0";
+const BASE_URL = (process.env.ANAPLAN_API_BASE_URL || "https://api.anaplan.com/2/0").replace(/\/+$/, "");
 const MAX_RETRIES = 3;
 const INITIAL_BACKOFF_MS = 1000;
 // Retry-After header uses seconds; we convert to ms at call site
